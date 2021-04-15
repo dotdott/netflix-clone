@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { device } from '../../../styles/components/device';
+
 export const Container = styled.div`
     display: flex;
     justify-content: center;
@@ -11,7 +13,6 @@ export const Container = styled.div`
     color: #fff;
 
     border-bottom: .5rem solid var(--grey-border);
-    /* padding-bottom: 2rem; */
 `;
 
 export const QuestionsWrapper = styled.div`
@@ -21,6 +22,12 @@ export const QuestionsWrapper = styled.div`
     align-items: center;
 
     width: 50%;
+        ${device.m1600}{
+            width: 80%;
+        }   
+            ${device.m1000}{
+                width: 90%;
+            }
 `;
 export const QuestionTitle = styled.h1`
 
@@ -37,9 +44,17 @@ export const QuestionWrapperText = styled.div`
 
     cursor: pointer;
     background: #303030;
+            ${device.m1000}{
+                width: 90%;
+                height: 60px;
+            }
 `
 export const QuestionText = styled.h2`
     font-size: 2em;
+            ${device.m1000}{
+                font-size: 1.6em;
+                font-weight: 500;
+            }
 `;
 export const IconDisplay = styled.img`
     width: 30px;

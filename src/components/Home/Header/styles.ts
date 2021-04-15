@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-
+import {device} from '../../../styles/components/device';
 
 export const Container = styled.div`
     width: 100vw;
     height: 80vh;
     overflow-x: hidden;
+        ${device.m550}{
+            height: 50vh;
+        }
 `;
+
 
 export const ContainerHeaderImage = styled.div`
     width: 100%;
@@ -14,6 +18,11 @@ export const ContainerHeaderImage = styled.div`
 export const BackgroundImage = styled.img`
     width: 100%;
     height: 100%;
+
+        ${device.m1600}{
+            width: auto;
+            height: 100%;
+        }
 `;
 
 export const HeaderContent = styled.div`
@@ -25,6 +34,9 @@ export const HeaderContent = styled.div`
     width: 100%;
     height: 80vh;
     border-bottom: .5rem solid var(--grey-border);
+        ${device.m550}{
+            height: 50vh;
+        }
 `;
 export const HeaderContentTop = styled.div`
     display: flex;
@@ -32,6 +44,9 @@ export const HeaderContentTop = styled.div`
     align-items: center;
 
     margin: 1.5rem 4rem;
+        ${device.m1000}{
+            margin: 1.5rem 1rem;
+        }
 `;
 export const LoginButton = styled.button`
     background: var(--brighter-red);
@@ -48,6 +63,10 @@ export const LoginButton = styled.button`
 export const LogoImage = styled.img`
     width: 10.4375rem;
     height: 2.8125rem;
+        ${device.m1000}{
+            width: 6.75rem;
+            height: 2rem;
+        }
 `;
 
 export const HeaderContentBody = styled.div`
@@ -60,30 +79,82 @@ export const HeaderContentBody = styled.div`
 
     color: #fff;
     text-align: center;
+        ${device.m550}{
+            margin-top: 5rem;
+        }
 `;
 export const TextH1 = styled.h1`
     font-size: 4rem;
     width: 35%;
     margin: .5rem 0;
-    `;
+
+        ${device.m1600}{
+            width: 40%;     
+            font-size: 3.2rem;   
+        }
+            ${device.m1280}{
+                width: 65%;
+            }
+
+                ${device.m1000}{
+                    width: 74%;
+                }      
+        
+                    ${device.m550}{
+                        width: 90%;
+                        font-size: 1.8rem;
+                    }
+
+`;
 export const TextH2 = styled.h2`
     font-weight: 500;
     margin: .5rem 0;
+
+        ${device.m1600}{
+            font-size: 2rem;
+        }
+             
+            ${device.m550}{
+                width: 90%;
+                font-size: 1.5rem;
+            }
 `;
 export const TextP = styled.p`
     font-size: 1.2rem;
     font-weight: 500;
     margin: 1rem 0;
+
+        ${device.m550}{
+            width: 90%;
+            text-align: center;
+        }
 `;
 
 export const SignUpDiv = styled.div`
     display: flex;
+    
+        ${device.m1000}{
+            flex-direction: column;
+        }
 `;
 export const SignUpInput = styled.input`
     padding: 1.5rem 1rem;
     font-size: 1rem;
 
     width: 30rem;
+
+        ${device.m550}{
+            padding: 1rem 1rem;
+            width: calc(30rem - 4rem);
+        }        
+        
+            ${device.m425}{
+                width: calc(30rem - 9rem);
+            }       
+                ${device.m425}{
+                    width: calc(30rem - 11rem);
+                }
+
 `;
 export const SignUpButton = styled.button`
     background: var(--darker-red);
@@ -98,6 +169,13 @@ export const SignUpButton = styled.button`
 
     cursor: pointer;
     border: none;
+
+        ${device.m1000}{
+            width: 120px;
+            padding: 1rem .5rem;
+            font-size: 1rem;
+            margin: 1rem auto;
+        }
 `;
 export const ButtonChevronRight = styled.img`
     position: relative;
@@ -105,4 +183,10 @@ export const ButtonChevronRight = styled.img`
 
     width: 25px;
     height: 25px;
+
+        ${device.m1000}{
+            width: 15px;
+            height: 15px;
+            left: .5rem;
+        }
 `;

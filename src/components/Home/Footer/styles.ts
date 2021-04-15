@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {device} from '../../../styles/components/device';
 
 export const Container = styled.div`    
     display: flex;
@@ -10,12 +11,24 @@ export const Container = styled.div`
     color: #757575;
     padding: 2rem 0;
     margin: 2rem 0;
+        ${device.m1600}{
+            display: block;
+        }
 `
 export const ContactText = styled.p`
     position: relative;
     left: -14.5%;
 
     font-size: 1.2rem;
+        ${device.m1600}{
+            left: 23%;
+        }
+            ${device.m1280}{
+                left: 16%;
+            }
+            ${device.m1000}{
+                left: 4%;
+            }
 `
 export const ContactHref = styled.a`
     cursor: pointer;
@@ -30,6 +43,15 @@ export const LinkDirectWrapper = styled.div`
     justify-content: center;
 
     gap: 4rem;
+        ${device.m1000}{
+            margin: 0 1.4rem;
+        }        
+        ${device.m500}{
+            gap: 2rem;
+        }    
+        ${device.m375}{
+            gap: .2rem;
+        }
 `;
 export const LinkColumn = styled.div`
     display: flex;
@@ -46,6 +68,16 @@ export const ContactNetflix = styled.p`
     left: -18.5%;
 
     font-size: 1rem;
+
+        ${device.m1600}{
+            left: 23%;
+        }
+        ${device.m1280}{
+                left: 16%;
+            }     
+            ${device.m1000}{
+                left: 4%;
+            }
 `;
 
 export const SelectLanguage = styled.select`    
@@ -61,4 +93,13 @@ export const SelectLanguage = styled.select`
     font-size: 1.2rem;
     padding: 1rem;
 
+         ${device.m1600}{
+                left: 23%;
+            }
+            ${device.m1280}{
+                left: 16%;
+            }
+            ${device.m1000}{
+                left: 4%;
+            }
 `
