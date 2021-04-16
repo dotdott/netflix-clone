@@ -1,14 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
+import LoginValidation from '../../LoginValidation';
 
 import {
     SignUpDiv,
     SignUpInput,
     TextP,
     SignUpButton,
-    ButtonChevronRight
+    ButtonChevronRight,
+    ErrorsWarn
 } from './styles';
 
+
+export interface ErrorsData {
+    email?: string
+    password?: string;
+};
+
 export default function SignInInvite() {
+    const router = useRouter();
+
+    const [inputEmail, setInputEmail] = useState(null);
+    const [errors, setErrors] = useState<ErrorsData>({} as ErrorsData);
+
+    function redirectSignUp(){
+        setErrors(LoginValidation({email: inputEmail}))
+
+        if(errors.email === undefined && inputEmail != ''){
+            router.push('/login');
+        }
+    }
+
+    useEffect(() => {
+        setErrors(LoginValidation({email: inputEmail}))
+
+        if(errors.email === undefined && inputEmail != ''){
+            setErrors({email: ''})
+        }
+
+    }, [inputEmail])
+
     return (
         <>
         <TextP>
@@ -16,12 +47,17 @@ export default function SignInInvite() {
         </TextP>
 
         <SignUpDiv>
-            <SignUpInput type="email" placeholder="Email" />
-            <SignUpButton>
+            <SignUpInput 
+                type="email" 
+                placeholder="Email" 
+                onChange={e => setInputEmail(e.target.value)} 
+                />
+            <SignUpButton onClick={redirectSignUp}>
                 Vamos Lá
                 <ButtonChevronRight src='/assets/chevron-right.svg' />
             </SignUpButton>
         </SignUpDiv>
+            <ErrorsWarn>{errors.email}</ErrorsWarn>
     </>
     )
 }

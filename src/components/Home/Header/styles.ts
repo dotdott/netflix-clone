@@ -7,6 +7,28 @@ export const Container = styled.div`
     overflow-x: hidden;
         ${device.m550}{
             height: 50vh;
+            
+            p:last-child{
+                top: -6rem;
+            }
+        }
+
+        ${device.m768}{
+            & p:last-child {
+                left: -10.5rem !important;
+                top: -5.5rem;
+            }
+        }        
+        ${device.m500}{
+            & p:last-child {
+                left: -8.5rem !important;
+            }
+        }
+
+        & p:last-child{
+            position: relative;
+            left: -17.5rem;
+            width: 30rem;
         }
 `;
 
@@ -188,5 +210,27 @@ export const ButtonChevronRight = styled.img`
             width: 15px;
             height: 15px;
             left: .5rem;
+        }
+`;
+
+
+export const ErrorsWarn = styled.p`
+    position: relative;
+    left: -6.5rem;
+    width: 30rem;
+
+    font-size: .9rem;
+    color: #ffa00a;
+    margin-bottom: -6px;
+
+        ${device.m1000}{
+            left: 0.5rem;
+            top: -6rem;
+        }        
+        ${device.m500}{
+            left: 2.5rem;
+        }        
+        ${device.m425}{
+            left: 5.5rem;
         }
 `;

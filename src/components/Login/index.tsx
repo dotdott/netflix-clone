@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginFooter from './Footer';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { 
     Container,
@@ -26,12 +27,39 @@ import {
     LoginSignUpText,
     LoginSignUpSpan,
 
-    LoginWarnText,
-    LoginWarnSpan,
+    LoginMessageText,
+    LoginMessageSpan,
+    ErrorsWarn
 } from './styles'
 
+import { ErrorsData } from '../Home/Header/SignInInvite';
+import LoginValidation from '../LoginValidation';
 
 export default function index() {
+    const router = useRouter();
+
+    const [inputEmail, setInputEmail] = useState(null);
+    const [inputPassword, setInputPassword] = useState(null);
+    const [errors, setErrors] = useState<ErrorsData>({} as ErrorsData);
+
+    function handleLogin(){
+        setErrors(LoginValidation({email: inputEmail, password: inputPassword}))
+
+        if(errors.email === undefined && inputEmail != '' && errors.password === undefined && inputPassword != ''){
+            alert('Você supostamente já pode logar!!!')
+        }
+    }
+
+    useEffect(() => {
+        setErrors(LoginValidation({ email: inputEmail, password: inputPassword }))
+
+        if(errors.email === undefined && inputEmail !== '' && errors.password === undefined && inputPassword !== ''){
+            setErrors({ email: '', password: '' });   
+        }
+
+    }, [inputEmail, inputPassword])    
+    
+
     return (
         <Container>
             <BackgroundImage src="https://assets.nflxext.com/ffe/siteui/vlv3/92bb3a0b-7e91-40a0-b27b-f2c3ac9ef6e4/b21e3ad9-aa05-4122-b6a8-977eb91d5657/BR-pt-20210322-popsignuptwoweeks-perspective_alpha_website_small.jpg" srcSet="https://assets.nflxext.com/ffe/siteui/vlv3/92bb3a0b-7e91-40a0-b27b-f2c3ac9ef6e4/b21e3ad9-aa05-4122-b6a8-977eb91d5657/BR-pt-20210322-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/92bb3a0b-7e91-40a0-b27b-f2c3ac9ef6e4/b21e3ad9-aa05-4122-b6a8-977eb91d5657/BR-pt-20210322-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w, https://assets.nflxext.com/ffe/siteui/vlv3/92bb3a0b-7e91-40a0-b27b-f2c3ac9ef6e4/b21e3ad9-aa05-4122-b6a8-977eb91d5657/BR-pt-20210322-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w" alt="netflix background image" />
@@ -39,10 +67,21 @@ export default function index() {
             <LoginArea>
                 <LoginWrapper>
                     <LoginTitle>Entrar</LoginTitle>
-                        <LoginEmailInput placeholder="Email ou número de telefone" />
-                        <LoginPasswordInput placeholder="Senha" />
+
+                        <LoginEmailInput 
+                            type="email"
+                            placeholder="Email ou número de telefone" 
+                            onChange={e => setInputEmail(e.target.value)} 
+                        />
+                            <ErrorsWarn>{errors.email}</ErrorsWarn>
+                        <LoginPasswordInput 
+                            type="password"
+                            placeholder="Senha" 
+                            onChange={e => setInputPassword(e.target.value)} 
+                            />
+                            <ErrorsWarn>{errors.password}</ErrorsWarn>
                         
-                        <LoginButton>Entrar</LoginButton>
+                        <LoginButton onClick={handleLogin}>Entrar</LoginButton>
 
                 <LoginInstructions>
                         <LoginLabelCheckbox htmlFor="confirm">
@@ -67,12 +106,12 @@ export default function index() {
                     </LoginSignUpSpan>
                 </LoginSignUpText>
 
-                <LoginWarnText>
+                <LoginMessageText>
                     Esta página é protegida pelo Google reCAPTCHA para garantir que você não é um robô.
-                    <LoginWarnSpan>
+                    <LoginMessageSpan>
                         Saiba mais.
-                    </LoginWarnSpan>
-                </LoginWarnText>
+                    </LoginMessageSpan>
+                </LoginMessageText>
 
                 </LoginWrapper>
             <LoginFooter />

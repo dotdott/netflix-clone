@@ -58,7 +58,7 @@ export const LoginWrapper = styled.div`
     gap: 1rem;
     width: 450px;
 
-    background: #000;
+    background: rgba(0,0,0,.7);
     padding: 3rem 4rem;
 
     margin-bottom: 15rem;
@@ -68,6 +68,7 @@ export const LoginWrapper = styled.div`
         top: 0;
         width: 100%;
         height: 60%;
+        background: #000;
 
         border-bottom: 2px solid var(--grey-border);
         padding: 3rem 1rem;
@@ -80,6 +81,8 @@ export const LoginTitle = styled.h1`
 `
 export const LoginEmailInput = styled.input`
     background: #333;
+    color: #fff;
+
     padding: 1rem;
     font-size: 1rem;
 
@@ -87,6 +90,10 @@ export const LoginEmailInput = styled.input`
 
     border-radius: .25rem;
     border: none;
+    outline: none;
+        &:focus {
+            filter: brightness(1.4);
+        }
 
         ${device.m768}{
             width: auto;
@@ -119,6 +126,7 @@ export const LoginInstructions = styled.div`
 `;
 export const LoginRememberMeCheckbox = styled.input`
 `;
+
 export const LoginLabelCheckbox = styled.label`
     font-size: .8rem;
     color: #b3b3b3;
@@ -166,13 +174,35 @@ export const LoginSignUpSpan = styled.span`
     }
 `
 
-export const LoginWarnText = styled.p`
+export const LoginMessageText = styled.p`
     margin: 0;
     font-size: .9rem;
     color: #8c8c8c;
 
     padding-bottom: 5rem;
 `
-export const LoginWarnSpan = styled(LoginSignUpSpan)`
+export const LoginMessageSpan = styled(LoginSignUpSpan)`
     color: #0071eb;
+`;
+
+export const ErrorsWarn = styled.p`
+    position: relative;
+    left: 0.5rem;
+    top: -1.5rem;
+    width: 30rem;
+
+    font-size: .9rem;
+    color: #e87c03;
+    margin-bottom: -6px;
+
+        ${device.m1000}{
+            left: 0.5rem;
+        }        
+        ${device.m500}{
+            left: 0rem;
+            width: 50%;
+        }        
+        ${device.m425}{
+            left: 0rem;
+        }
 `;
