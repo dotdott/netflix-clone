@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import LoginValidation from '../../LoginValidation';
 
@@ -10,6 +10,7 @@ import {
     ButtonChevronRight,
     ErrorsWarn
 } from './styles';
+import { LoginContext } from '../../../contexts/LoginContext';
 
 
 export interface ErrorsData {
@@ -20,6 +21,8 @@ export interface ErrorsData {
 export default function SignInInvite() {
     const router = useRouter();
 
+    const { setSignupEmail } = useContext(LoginContext);
+
     const [inputEmail, setInputEmail] = useState(null);
     const [errors, setErrors] = useState<ErrorsData>({} as ErrorsData);
 
@@ -27,7 +30,9 @@ export default function SignInInvite() {
         setErrors(LoginValidation({email: inputEmail}))
 
         if(errors.email === undefined && inputEmail != ''){
-            router.push('/login');
+            setSignupEmail(inputEmail);
+
+            router.push('/signup');
         }
     }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import LoginFooter from './Footer';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -34,19 +34,30 @@ import {
 
 import { ErrorsData } from '../Home/Header/SignInInvite';
 import LoginValidation from '../LoginValidation';
+import { LoginContext } from '../../contexts/LoginContext';
 
 export default function index() {
     const router = useRouter();
 
-    const [inputEmail, setInputEmail] = useState(null);
-    const [inputPassword, setInputPassword] = useState(null);
+    const { SignIn, currentUser, SignOut } = useContext(LoginContext);
+
+    const [inputEmail, setInputEmail] = useState<string | null>(null);
+    const [inputPassword, setInputPassword] = useState<string | null>(null);
     const [errors, setErrors] = useState<ErrorsData>({} as ErrorsData);
 
-    function handleLogin(){
+    async function handleLogin(){
         setErrors(LoginValidation({email: inputEmail, password: inputPassword}))
-
         if(errors.email === undefined && inputEmail != '' && errors.password === undefined && inputPassword != ''){
-            alert('Você supostamente já pode logar!!!')
+            try{
+                await SignIn(inputEmail, inputPassword);
+                if(currentUser){
+                    SignOut()
+                }
+
+            } catch (err) {
+                console.log(err.message)
+            }
+
         }
     }
 
@@ -80,8 +91,8 @@ export default function index() {
                             onChange={e => setInputPassword(e.target.value)} 
                             />
                             <ErrorsWarn>{errors.password}</ErrorsWarn>
-                        
                         <LoginButton onClick={handleLogin}>Entrar</LoginButton>
+
 
                 <LoginInstructions>
                         <LoginLabelCheckbox htmlFor="confirm">
@@ -101,7 +112,7 @@ export default function index() {
 
                 <LoginSignUpText>
                     Novo por aqui? 
-                    <LoginSignUpSpan>
+                    <LoginSignUpSpan  onClick={() => router.push('/')}>
                         Assine agora.
                     </LoginSignUpSpan>
                 </LoginSignUpText>
