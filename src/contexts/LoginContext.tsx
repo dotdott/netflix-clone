@@ -21,6 +21,8 @@ interface LoginProviderProps {
 export const LoginContext = createContext({} as LoginContextData);
 
 export function LoginProvider({children}: LoginProviderProps){
+    const [loading, setLoading] = useState(true);
+
     const [signupEmail, setSignupEmail] = useState('');
     const [signupPassword, setSignupPassword] = useState('');
 
@@ -41,7 +43,7 @@ export function LoginProvider({children}: LoginProviderProps){
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
-            console.log(user)
+            setLoading(false)
         })
 
         return unsubscribe;
@@ -58,7 +60,7 @@ export function LoginProvider({children}: LoginProviderProps){
             setSignupPassword,
             signupPassword
         }}>
-            {children}
+            {!loading && children}
         </LoginContext.Provider>
     )
 }

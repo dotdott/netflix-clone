@@ -206,3 +206,33 @@ export const ErrorsWarn = styled.p`
             left: 0rem;
         }
 `;
+
+export const ErrorsWarnFirebase = styled.p`
+    position: relative;
+    left: 0rem;
+    top: -1.5rem;
+    width: 20rem;
+
+    font-size: .9rem;
+    margin-bottom: -6px;
+    padding: 1rem;
+
+    background: #e87c03;
+    color: #fff;
+
+        & span {
+            text-decoration: underline;   
+            cursor: pointer;
+        }
+
+        ${device.m1000}{
+            left: 0.5rem;
+        }        
+        ${device.m500}{
+            left: 0rem;
+            width: 50%;
+        }        
+        ${device.m425}{
+            left: 0rem;
+        }
+`;

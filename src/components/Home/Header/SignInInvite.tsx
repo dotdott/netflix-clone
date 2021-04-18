@@ -16,6 +16,8 @@ import { LoginContext } from '../../../contexts/LoginContext';
 export interface ErrorsData {
     email?: string
     password?: string;
+    firebaseEmail?: string;
+    firebasePass?: string;
 };
 
 export default function SignInInvite() {

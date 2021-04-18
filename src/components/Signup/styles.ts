@@ -59,7 +59,7 @@ export const SignUpSteps = styled.div<Props>`
     justify-content: center;
     align-items: center;
 
-    height: ${props => props.step != 2 ? '62%' : '50%' };
+    height: ${props => props.step != 2 ? '62%' : '55%' };
     width: 100%;
 `;
 export const StepsWrapper = styled.div<Props>`
@@ -121,4 +121,46 @@ export const StepInput = styled.input`
     width: 100%;
 
     outline: none;
+`
+
+export const StepErrorDiv = styled.div`
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    font-family: sans-serif;
+
+    background: #ffa00a;
+    color: #fff;
+    width: 100%;
+    padding: .5rem;
+
+    gap: .8rem
+` 
+export const StepAlertIcon = styled.img`
+    width: 30px;
+    height: 30px;
+` 
+
+export const StepErrorText = styled.p`
+    font-size: 1rem;
+    color: #fff;
+
+    & span {
+        text-decoration: underline;
+        color: #fff;
+        cursor: pointer;
+    }
+`;
+
+export const StepWarnLogin = styled.p`
+    margin-top: -10px;
+    font-size: .8rem;
+    color: #b92d2b;
+`;
+
+export const StepGif = styled.img `
+    width: 300px;
+    position: relative;
+    top: 50px;
+    z-index: -1;
 `

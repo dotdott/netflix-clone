@@ -7,14 +7,13 @@ export const Footer = styled.div`
     bottom: -1vh;
 
     width: 100%;
-    height: 27vh;
+    height: 23vh;
 
     color: #757575;
     background: #f3f3f3;
     border-top: 1px solid #e6e6e6;
 
     font-family: sans-serif;
-    overflow-x: hidden;
 `;
 
 

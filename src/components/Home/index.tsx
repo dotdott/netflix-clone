@@ -10,6 +10,7 @@ const Container = styled.div`
     overflow-x: hidden;
 `;
 
+
 export default function Homepage() {
     return (
         <Container>

@@ -29,7 +29,9 @@ import {
 
     LoginMessageText,
     LoginMessageSpan,
-    ErrorsWarn
+
+    ErrorsWarn,
+    ErrorsWarnFirebase
 } from './styles'
 
 import { ErrorsData } from '../Home/Header/SignInInvite';
@@ -39,25 +41,33 @@ import { LoginContext } from '../../contexts/LoginContext';
 export default function index() {
     const router = useRouter();
 
-    const { SignIn, currentUser, SignOut } = useContext(LoginContext);
+    const { SignIn } = useContext(LoginContext);
 
     const [inputEmail, setInputEmail] = useState<string | null>(null);
     const [inputPassword, setInputPassword] = useState<string | null>(null);
     const [errors, setErrors] = useState<ErrorsData>({} as ErrorsData);
+
+    function handleFirebaseError(error: string){
+        if(error === 'auth/user-not-found'){
+            setErrors(LoginValidation({ firebaseEmail: error }))
+        }        
+        
+        if(error === 'auth/wrong-password'){
+            setErrors(LoginValidation({ firebasePass: error }))
+        }
+    }
 
     async function handleLogin(){
         setErrors(LoginValidation({email: inputEmail, password: inputPassword}))
         if(errors.email === undefined && inputEmail != '' && errors.password === undefined && inputPassword != ''){
             try{
                 await SignIn(inputEmail, inputPassword);
-                if(currentUser){
-                    SignOut()
-                }
+                
+                return router.push('/browse');
 
             } catch (err) {
-                console.log(err.message)
+                handleFirebaseError(err.code);
             }
-
         }
     }
 
@@ -84,13 +94,33 @@ export default function index() {
                             placeholder="Email ou número de telefone" 
                             onChange={e => setInputEmail(e.target.value)} 
                         />
-                            <ErrorsWarn>{errors.email}</ErrorsWarn>
+
+                            {errors.firebaseEmail ? 
+                                <ErrorsWarnFirebase>
+                                    {errors.firebaseEmail} 
+                                    <Link href='signup'><span>crie um nova conta.</span></Link>
+                                </ErrorsWarnFirebase>
+                            :
+                            errors.firebasePass != undefined ||
+                                <ErrorsWarn>{errors.email}</ErrorsWarn>
+                            }
+
                         <LoginPasswordInput 
                             type="password"
                             placeholder="Senha" 
                             onChange={e => setInputPassword(e.target.value)} 
                             />
-                            <ErrorsWarn>{errors.password}</ErrorsWarn>
+
+                            {errors.firebasePass ?
+                                <ErrorsWarnFirebase>
+                                    {errors.firebasePass} 
+                                    <Link href='forget_password'><span>redefina sua senha.</span></Link>
+                                </ErrorsWarnFirebase>
+                            :
+                            errors.firebaseEmail != undefined || 
+                                <ErrorsWarn>{errors.password}</ErrorsWarn>                            
+                            }
+
                         <LoginButton onClick={handleLogin}>Entrar</LoginButton>
 
 
