@@ -3,9 +3,7 @@ import Login from '../../components/Login';
 import redirectUser from '../../RedirectUser';
 
 export default function index() {
-    useEffect(() => {
-        redirectUser();
-    }, [])
+    redirectUser();
 
     return (
         <Login />

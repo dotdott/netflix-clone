@@ -4,9 +4,7 @@ import redirectUser from '../../RedirectUser';
 
 
 export default function index() {
-    useEffect(() => {
-       redirectUser();
-    }, []);
+    redirectUser();
 
     return (
         <Signup />
