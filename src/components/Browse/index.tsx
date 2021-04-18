@@ -9,10 +9,11 @@ import {
 
 export default function index() {
     const { SignOut } = useContext(LoginContext);
+    const router = useRouter();
 
-    function redirectSignOut(){
-        SignOut();
-        useRouter().push('/login');
+    async function redirectSignOut(){
+        await SignOut();
+        return router.push('/login');
     }
 
     return (
