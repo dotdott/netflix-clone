@@ -1,13 +1,17 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
+
+import { useRouter } from 'next/router';
 import { LoginContext } from '../../contexts/LoginContext';
+
+import Navbar from './Navbar';
+import Header  from './Header';
 
 import {
     Container
 } from './styles';
 
-export default function index() {
+
+export default function index({movie}) {
     const { SignOut } = useContext(LoginContext);
     const router = useRouter();
 
@@ -18,8 +22,9 @@ export default function index() {
 
     return (
         <Container>
-           <Link href='/'>Browser</Link>
-           <p onClick={redirectSignOut}> logout</p>
+           {/* <p onClick={redirectSignOut}> logout</p> */}
+            <Navbar />
+            <Header movie={movie}/>
         </Container>
     )
 }
