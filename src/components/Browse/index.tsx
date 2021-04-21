@@ -1,30 +1,55 @@
-import React, { useContext } from 'react';
-
-import { useRouter } from 'next/router';
-import { LoginContext } from '../../contexts/LoginContext';
+import React from 'react';
 
 import Navbar from './Navbar';
 import Header  from './Header';
+import MoviesCarousel  from './MoviesCarousel';
 
 import {
-    Container
+    ContainerMovies,
+    MoviesWrapper,
+    MoviesTitle,
 } from './styles';
 
 
-export default function index({movie}) {
-    const { SignOut } = useContext(LoginContext);
-    const router = useRouter();
-
-    async function redirectSignOut(){
-        await SignOut();
-        return router.push('/login');
-    }
+export default function index({
+    movie, 
+    trending,
+    animeMovie,
+    actionMovie,
+    sciFiTV
+}) {
+    const random = Math.floor(Math.random() * 21);
 
     return (
-        <Container>
+        <ContainerMovies>
            {/* <p onClick={redirectSignOut}> logout</p> */}
             <Navbar />
-            <Header movie={movie}/>
-        </Container>
+            <Header movie={movie.results[random]}/>
+        
+        <MoviesWrapper>
+            <MoviesTitle>Em alta</MoviesTitle>            
+            <MoviesCarousel movie={trending} />
+        </MoviesWrapper>
+
+        <MoviesWrapper>
+            <MoviesTitle>Séries de TV Populares</MoviesTitle>            
+            <MoviesCarousel movie={movie} />
+        </MoviesWrapper>        
+        
+        <MoviesWrapper>
+            <MoviesTitle>Animações</MoviesTitle>            
+            <MoviesCarousel movie={animeMovie} />
+        </MoviesWrapper>        
+        
+        <MoviesWrapper>
+            <MoviesTitle>Filmes de Ação</MoviesTitle>            
+            <MoviesCarousel movie={actionMovie} />
+        </MoviesWrapper>   
+
+        <MoviesWrapper>
+            <MoviesTitle>Séries de Ficção Científica</MoviesTitle>            
+            <MoviesCarousel movie={sciFiTV} />
+        </MoviesWrapper>
+        </ContainerMovies>
     )
 }

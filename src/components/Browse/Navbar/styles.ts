@@ -12,6 +12,7 @@ export const Container = styled.div`
     background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
 
     font-family: sans-serif; 
+    z-index: 2;
 `;
 
 export const NavbarBrowseSection = styled.div`

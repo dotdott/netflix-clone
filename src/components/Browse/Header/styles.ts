@@ -11,7 +11,7 @@ export const Container = styled.div`
 export const BackgroundImage = styled.img`
     position: relative;
     top: -4.1rem;
-    z-index: -1;
+    z-index: 0;
 
     width: 100vw;
     height: 100%;

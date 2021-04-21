@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { useRouter } from 'next/router';
+import { LoginContext } from '../../../contexts/LoginContext';
 
 import {
     Container,
@@ -16,6 +19,13 @@ import {
 
 
 export default function index() {
+    const { SignOut } = useContext(LoginContext);
+    const router = useRouter();
+
+    async function redirectSignOut(){
+        await SignOut();
+        return router.push('/login');
+    }
     return (
         <Container>
             <NavbarBrowseSection>
@@ -37,6 +47,7 @@ export default function index() {
                 <BellIcon src="/assets/bell.svg"/>
 
                 <ProfileIcon src="/assets/user.svg"/>
+                <ChildsBrowse onClick={redirectSignOut}>SAIR</ChildsBrowse>
             </NavbarUserSection>            
         </Container>
     )

@@ -19,7 +19,6 @@ import {
 } from './styles';
 
 export default function index({movie}) {
-    console.log(movie);
     const movieYear = movie.first_air_date.slice(0,4);
 
     return (
