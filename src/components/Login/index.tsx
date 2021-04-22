@@ -37,6 +37,7 @@ import {
 import { ErrorsData } from '../Home/Header/SignInInvite';
 import LoginValidation from '../LoginValidation';
 import { LoginContext } from '../../contexts/LoginContext';
+import { CopyrightFooter } from '../CopyrightFooter';
 
 export default function index() {
     const router = useRouter();
@@ -157,7 +158,8 @@ export default function index() {
                 </LoginWrapper>
             <LoginFooter />
             </LoginArea>
-
+            
+            <CopyrightFooter />
         </Container>
     )
 }

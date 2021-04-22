@@ -47,11 +47,3 @@ export default function index({movie}) {
         </Container>
     )
 }
-
-// https://api.themoviedb.org/3/movie/550?api_key=77ab091d5e2a05396440cb47def08495&append_to_response=videos&language=pt-BR
-
-//https://image.tmdb.org/t/p/w500/4rI3GkUH2uJmACFFTMpMkdi6Pzb.jpg
-
-
-//https://api.themoviedb.org/3/search/tv?api_key=77ab091d5e2a05396440cb47def08495&query=The+walking+dead
-//

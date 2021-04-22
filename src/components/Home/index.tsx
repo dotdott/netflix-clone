@@ -3,6 +3,7 @@ import Header from "./Header";
 import Body from "./Body";
 import PopQuestions from "./PopQuestions";
 import Footer from "./Footer";
+import { CopyrightFooter } from '../CopyrightFooter';
 
 
 const Container = styled.div`
@@ -42,6 +43,8 @@ export default function Homepage() {
             <PopQuestions />
 
             <Footer />
+            
+            <CopyrightFooter />
         </Container>
     )
 }

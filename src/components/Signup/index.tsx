@@ -19,6 +19,7 @@ import {
 } from './footerStyles';
 
 import { UserSignupSteps } from './SignupSteps';
+import { CopyrightFooter } from '../CopyrightFooter';
 
 export default function index() {
     return (
@@ -61,6 +62,7 @@ export default function index() {
            </SelectLanguage>
 
        </Footer>
+       <CopyrightFooter />
         </Container>
     )
 }

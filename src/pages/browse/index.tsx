@@ -5,15 +5,15 @@ import { LoginContext } from '../../contexts/LoginContext';
 import { useRouter } from 'next/router';
 import { GetStaticProps } from 'next';
 
+import Axios from 'axios';
 
 export default function index({
     movie, 
     trendingAll, 
     dataAnime,
     dataAction,
-    dataSciFi
+    dataSciFi,
 }) {
-    console.log(dataAnime)
     const { currentUser } = useContext(LoginContext);
 
     const router = useRouter();
@@ -34,32 +34,65 @@ export default function index({
 }
 
  export const getStaticProps: GetStaticProps = async () => {
-    const response = await fetch('https://api.themoviedb.org/3/tv/popular?api_key=77ab091d5e2a05396440cb47def08495&language=pt-BR');
-    const data = await response.json();
+    const api = Axios.create({
+        baseURL: 'https://api.themoviedb.org/3/'
+    })
 
-    const trendingAll = await fetch('https://api.themoviedb.org/3/trending/all/week?api_key=77ab091d5e2a05396440cb47def08495&language=pt-BR')
-    const dataAll = await trendingAll.json();
+    const popular = await api.get('tv/popular', {
+        params: {
+            api_key: '77ab091d5e2a05396440cb47def08495',
+            language: 'pt-BR'
+        }
+    })
+
+    const trending = await api.get('trending/all/week', {
+        params: {
+            api_key: '77ab091d5e2a05396440cb47def08495',
+            language: 'pt-BR'
+        }
+    })    
     
-    const AnimatedMovies = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=77ab091d5e2a05396440cb47def08495&language=en-US&with_genres=16')
-    const dataAnime = await AnimatedMovies.json();    
+    const animated = await api.get('discover/movie', {
+        params: {
+            api_key: '77ab091d5e2a05396440cb47def08495',
+            language: 'en-US',
+            with_genres: '16'
+        }
+    })    
+
+    const action = await api.get('discover/movie', {
+        params: {
+            api_key: '77ab091d5e2a05396440cb47def08495',
+            language: 'en-US',
+            with_genres: '28'
+        }
+    })
+
+    const comedy = await api.get('discover/movie', {
+        params: {
+            api_key: '77ab091d5e2a05396440cb47def08495',
+            language: 'en-US',
+            with_genres: '35'
+        }
+    })    
     
-    const ActionMovies = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=77ab091d5e2a05396440cb47def08495&language=en-US&with_genres=28')
-    const dataAction = await ActionMovies.json();
+    const scifi = await api.get('discover/tv', {
+        params: {
+            api_key: '77ab091d5e2a05396440cb47def08495',
+            language: 'en-US',
+            with_genres: '878'
+        }
+    })
 
-    const ComedyMovies = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=77ab091d5e2a05396440cb47def08495&language=en-US&with_genres=35')
-    const dataComedy = await ComedyMovies.json();
-
-    const SciFiSeries = await fetch('https://api.themoviedb.org/3/discover/tv?api_key=77ab091d5e2a05396440cb47def08495&language=en-US&with_genres=878')
-    const dataSciFi = await SciFiSeries.json();
     
     return {
          props: {
-             movie: data,
-             trendingAll: dataAll,
-             dataAnime: dataAnime,
-             dataAction: dataAction,
-             dataComedy: dataComedy,
-             dataSciFi: dataSciFi,
+             movie: popular.data,
+             trendingAll: trending.data,
+             dataAnime: animated.data,
+             dataAction: action.data,
+             dataComedy: comedy.data,
+             dataSciFi: scifi.data,
          },
          revalidate: 60 * 60 * 8
      }

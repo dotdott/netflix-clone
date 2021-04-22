@@ -3,6 +3,8 @@ import React from 'react'
 import Carousel, { arrowsPlugin, slidesToScrollPlugin, slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 
+import Image from 'next/image';
+
 import {
     Container,
     MovieImg,
@@ -16,7 +18,14 @@ type ImageData = {
 
 export default function index({movie}) {
     const MovieSlideImages = movie.results.map((image: ImageData) => image.backdrop_path && (
-        <MovieImg src={'https://image.tmdb.org/t/p/w500' + image.backdrop_path} />
+        <Image 
+            width={300} 
+            height={167} 
+            src={'https://image.tmdb.org/t/p/w500' + image.backdrop_path} 
+            key={image.backdrop_path}
+            alt='image poster'
+            objectFit='cover'
+        />
     ))
 
     return (

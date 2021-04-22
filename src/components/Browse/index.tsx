@@ -9,6 +9,7 @@ import {
     MoviesWrapper,
     MoviesTitle,
 } from './styles';
+import { CopyrightFooter } from '../CopyrightFooter';
 
 
 export default function index({
@@ -22,7 +23,6 @@ export default function index({
 
     return (
         <ContainerMovies>
-           {/* <p onClick={redirectSignOut}> logout</p> */}
             <Navbar />
             <Header movie={movie.results[random]}/>
         
@@ -50,6 +50,8 @@ export default function index({
             <MoviesTitle>Séries de Ficção Científica</MoviesTitle>            
             <MoviesCarousel movie={sciFiTV} />
         </MoviesWrapper>
+
+        <CopyrightFooter />
         </ContainerMovies>
     )
 }
