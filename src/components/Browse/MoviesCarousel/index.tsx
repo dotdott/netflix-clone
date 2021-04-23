@@ -7,9 +7,9 @@ import Image from 'next/image';
 
 import {
     Container,
-    MovieImg,
     ArrowIcon
 } from './styles';
+import { WindowResize } from '../../../Utils/WindowResize';
 
 type ImageData = {
     backdrop_path: string;
@@ -28,6 +28,8 @@ export default function index({movie}) {
         />
     ))
 
+    const size = WindowResize();
+
     return (
         <Container>
             <Carousel
@@ -36,13 +38,17 @@ export default function index({movie}) {
                     {
                         resolve: slidesToShowPlugin,
                         options: {
-                            numberOfSlides: 6
+                            numberOfSlides: size.width > 1600 ? 6 
+                            : size.width < 1600 && size.width > 850 ? 4 
+                            : size.width < 850 && 2,
                         }
                     },    
                     {
                         resolve: slidesToScrollPlugin,
                         options: {
-                         numberOfSlides: 6,
+                            numberOfSlides: size.width > 1600 ? 6 
+                            : size.width < 1600 && size.width > 850 ? 4 
+                            : size.width < 850 && 2,
                         },
                       },
                       {
@@ -52,9 +58,9 @@ export default function index({movie}) {
                           arrowRight: <ArrowIcon src='/assets/arrow-right.svg' />,
                           addArrowClickHandler: true,
                         }
-                      }
+                      },
                 ]}
-                animationSpeed={1000}            
+                animationSpeed={1000}        
             >   
 
             {MovieSlideImages}

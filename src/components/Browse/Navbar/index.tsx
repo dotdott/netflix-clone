@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { useRouter } from 'next/router';
 import { LoginContext } from '../../../contexts/LoginContext';
@@ -7,14 +7,15 @@ import {
     Container,
     NavbarBrowseSection,
     LogoImg,
-    BrowseSection,
 
     NavbarUserSection,
     SearchIcon,
-    ChildsBrowse,
     GiftIcon,
     BellIcon,
     ProfileIcon,
+
+    UserDropdown,
+    UserActions,
 } from './styles';
 
 
@@ -26,29 +27,36 @@ export default function index() {
         await SignOut();
         return router.push('/login');
     }
+
+    const [showDropdown, setShowDropdown] = useState(false);
+
     return (
-        <Container>
+        <Container onMouseLeave={() => setShowDropdown(false)}>
             <NavbarBrowseSection>
                 <LogoImg src="/assets/logo.svg" />
-                <BrowseSection>Inicio</BrowseSection>
-                <BrowseSection>Séries</BrowseSection>
-                <BrowseSection>Filmes</BrowseSection>
-                <BrowseSection>Bombando</BrowseSection>
-                <BrowseSection>Minha Lista</BrowseSection>
             </NavbarBrowseSection>
 
             <NavbarUserSection>
                 <SearchIcon src="/assets/search.svg"/>
 
-                <ChildsBrowse>INFANTIL</ChildsBrowse>
-
                 <GiftIcon src="/assets/gift.svg" />
 
                 <BellIcon src="/assets/bell.svg"/>
 
-                <ProfileIcon src="/assets/user.svg"/>
-                <ChildsBrowse onClick={redirectSignOut}>SAIR</ChildsBrowse>
-            </NavbarUserSection>            
+                <ProfileIcon 
+                    src="/assets/user.svg" 
+                    onMouseEnter={() => setShowDropdown(true)}
+                    onClick={() => setShowDropdown(!showDropdown)}
+                />
+            <UserDropdown  
+                onMouseLeave={() => setShowDropdown(false)}
+                dropdown={showDropdown}        
+            >
+                <UserActions>Conta</UserActions>
+                <UserActions onClick={redirectSignOut}>Sair da Netflix</UserActions>
+            </UserDropdown>            
+            </NavbarUserSection>
+
         </Container>
     )
 }

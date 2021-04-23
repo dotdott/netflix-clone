@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
+interface Props {
+    dropdown: boolean;
+}
+
 export const Container = styled.div`
-    position: sticky;
+    position: fixed;
     top: 0;
 
     display: flex;
@@ -67,4 +71,28 @@ export const ProfileIcon = styled(SearchIcon)`
     background: #e5cdc8;
 
     border-radius: 5px;
+`;
+
+export const UserDropdown = styled.div<Props>`
+    display: ${props => props.dropdown ? 'block' : 'none'};
+
+    z-index: 999;
+    width: 100px;
+
+    position: absolute;
+    top: 58px;
+    right: 30px;
+
+    background: rgba(0,0,0,.5);
+`;
+export const UserActions = styled.p`
+    margin: .5rem;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;

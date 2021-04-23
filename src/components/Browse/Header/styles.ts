@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { device } from '../../../styles/components/device';
+
 export const Container = styled.div`
     width: 100vw;
     height: 90vh;
@@ -15,6 +17,7 @@ export const BackgroundImage = styled.img`
 
     width: 100vw;
     height: 100%;
+    object-fit: cover;
 `;
 
 export const MovieDetails = styled.div`
@@ -27,10 +30,22 @@ export const MovieDetails = styled.div`
     color: #fff;
     width: 40%;
     margin-left: 3rem;
+
+    ${device.m1280}{
+        width: 55%;
+    }    
+    ${device.m550}{
+        width: 90%;
+        margin-left: 1rem;
+    }
 `;
 export const MovieTitle = styled.h1`
     font-size: 4rem;
     margin: 0;
+
+    ${device.m550}{
+        font-size: 3rem;
+    }
 `;
 
 export const MovieInfo = styled.div`
@@ -43,6 +58,10 @@ export const MovieOverview = styled.p`
     width: 70%;
     margin-top: 0;
     margin-bottom: 2rem;
+
+    ${device.m1280}{
+        width: 100%;
+    }
 `;
 
 export const MovieScore = styled.h2`
@@ -78,6 +97,14 @@ export const MovieWatchButton = styled.button`
         &:hover {
             filter: brightness(80%);
         }
+    
+        ${device.m550}{
+            padding: 1rem 1rem;
+            font-size: 1rem;
+        }
+        ${device.m325}{
+            padding: .5rem;
+        }
 `;
 export const MovieInfoButton = styled(MovieWatchButton)`
     background-color: rgba(109, 109, 110, 0.7);
@@ -92,5 +119,10 @@ export const MovieInfoButton = styled(MovieWatchButton)`
 export const PlayIcon = styled.img`
     width: 30px;
     height: 30px;
+
+    ${device.m550}{
+        width: 25px;
+        height: 25px;
+    }
 `;
 export const ExclamationIcon = styled(PlayIcon)``;

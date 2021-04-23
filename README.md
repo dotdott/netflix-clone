@@ -1,9 +1,9 @@
-## Working in progress.
-- [Check Progress](https://netflix-clone-dotdott.vercel.app/)
+## Check live.
+- [Netflix clone](https://netflix-clone-dotdott.vercel.app/)
 
-<h2>About it so far...</h2>
+<h2>About it</h2>
 
-- It's almost a full clone of the platform <b>Netflix</b> with the exception of the actual videos streaming.
+- Its a clone of  <b>Netflix</b>, having 4 page cloned, the landing page, signup, login && browse page where it has a show case of movies/tv-series.
 
 - Have sections of carousels of movies/tv-series equal the original netflix.
 
@@ -21,5 +21,5 @@
 - NextJS
 - TypeScript
 - Axios
-- Styled-components
 - Firebase
+- Styled-components

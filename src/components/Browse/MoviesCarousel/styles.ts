@@ -3,14 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
     background: #141414;
     overflow-x: hidden;
+
+    & img {
+        cursor: pointer;
+        object-fit: cover;
+    }
 `;
 
-export const MovieImg = styled.img`
-    width: 300px;
-    margin: 0 2rem;
-
-    cursor: pointer;
-`;
 
 export const ArrowIcon = styled.img`
     cursor: pointer;
@@ -25,4 +24,9 @@ export const ArrowIcon = styled.img`
 
             transition: ease .5s all;
         }
+
+    @media screen and (max-width: 768px){
+        width: 20px;
+        height: 30px;
+    }
 `;
